@@ -1,5 +1,6 @@
 ﻿using FluentValidation.Results;
 using LoanGames.Domain.Interfaces.Repositories;
+using NetDevPack.Data;
 using System.Threading.Tasks;
 
 namespace LoanGames.Domain.Commands

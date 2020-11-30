@@ -1,5 +1,6 @@
 ﻿using LoanGames.Application.Interfaces;
 using LoanGames.Application.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ namespace LoanGames.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+  //  [Authorize]
     public class PersonController : ControllerBase
     {
 
@@ -55,5 +57,11 @@ namespace LoanGames.Web.Controllers
         {
             await _personAppService.Remove(id);
         }
+
+
+
+     
+
+
     }
 }

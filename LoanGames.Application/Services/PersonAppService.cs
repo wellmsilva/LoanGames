@@ -51,14 +51,14 @@ namespace LoanGames.Application.Services
 
         public async Task<ValidationResult> Remove(Guid id)
         {
-            var removeCommand = _mapper.Map<RemovePersonCommand>(id);
-            return await _mediator.SendCommand(removeCommand);
+            var command = _mapper.Map<RemovePersonCommand>(id);
+            return await _mediator.SendCommand(command);
         }
 
         public async Task<ValidationResult> Update(PersonViewModel model)
         {
-            var updateCommand = _mapper.Map<UpdatePersonCommand>(model);
-            return await _mediator.SendCommand(updateCommand);
+            var command = _mapper.Map<UpdatePersonCommand>(model);
+            return await _mediator.SendCommand(command);
         }
 
         public void Dispose()

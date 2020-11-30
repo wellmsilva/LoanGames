@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 
 namespace LoanGames.Domain.Entities
@@ -7,8 +8,9 @@ namespace LoanGames.Domain.Entities
     {
         protected Game() { }
 
-        public Game(string name)
+        public Game(Guid id,string name)
         {
+            Id = id;
             Name = name;
         }
 

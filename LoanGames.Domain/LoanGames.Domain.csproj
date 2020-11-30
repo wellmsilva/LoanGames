@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="9.3.0" />
     <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="NetDevPack" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>

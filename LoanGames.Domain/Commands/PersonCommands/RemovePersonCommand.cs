@@ -8,7 +8,7 @@ namespace LoanGames.Domain.Commands.PersonCommands
     {
         public RemovePersonCommand(Guid id)
         {
-
+            Id = id;
         }
     }
 }

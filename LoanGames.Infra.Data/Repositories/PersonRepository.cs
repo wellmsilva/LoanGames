@@ -8,26 +8,13 @@ using System.Threading.Tasks;
 
 namespace LoanGames.Infra.Data.Repositories
 {
-    public class PersonRepository : IPersonRepository
+    public class PersonRepository : RepositoryBase<Person>, IPersonRepository
     {
-        protected readonly MainContext Db;
-
-        protected readonly DbSet<Person> DbSet;
 
 
-        public PersonRepository(MainContext context)
-        {
-            Db = context;
-            DbSet = Db.Set<Person>();
-        }
+        public PersonRepository(MainContext context) : base(context) { }
 
-        public IUnitOfWork UnitOfWork => Db;
 
-        public void Add(Person entity)
-        {
-            DbSet.Add(entity);
-        }
-                
 
         public async Task<IEnumerable<Person>> GetAll()
         {
@@ -44,18 +31,7 @@ namespace LoanGames.Infra.Data.Repositories
             return await DbSet.AsNoTracking().FirstOrDefaultAsync(c => c.Name == name);
         }
 
-        public void Remove(Person entity)
-        {
-            DbSet.Remove(entity);
-        }
 
-        public void Update(Person entity)
-        {
-            DbSet.Update(entity);
-        }
-        public void Dispose()
-        {
-            Db.Dispose();
-        }
+
     }
 }

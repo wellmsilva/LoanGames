@@ -1,0 +1,6 @@
+version: '3'
+services: 
+  loangames:
+    build: .
+    ports: 
+      - "8081:80"

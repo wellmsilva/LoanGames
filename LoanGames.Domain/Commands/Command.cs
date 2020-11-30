@@ -1,6 +1,6 @@
 ﻿using FluentValidation.Results;
-using LoanGames.Domain.Messaging;
 using MediatR;
+using NetDevPack.Messaging;
 using System;
 
 namespace LoanGames.Domain.Commands

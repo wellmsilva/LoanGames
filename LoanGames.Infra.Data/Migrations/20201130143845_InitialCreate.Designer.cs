@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LoanGames.Infra.Data.Migrations
 {
     [DbContext(typeof(MainContext))]
-    [Migration("20201129131620_InitialCreate")]
+    [Migration("20201130143845_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,6 +41,9 @@ namespace LoanGames.Infra.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DateReturn")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("Game_Id")
@@ -76,6 +79,39 @@ namespace LoanGames.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Persons");
+                });
+
+            modelBuilder.Entity("LoanGames.Domain.Entities.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("ce6883ad-8ddb-4cbd-903a-f7a7ce13a928"),
+                            Active = true,
+                            Name = "Admin",
+                            Password = "123456",
+                            UserName = "admin"
+                        });
                 });
 
             modelBuilder.Entity("LoanGames.Domain.Entities.Loan", b =>

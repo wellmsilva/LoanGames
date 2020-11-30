@@ -23,22 +23,31 @@ namespace LoanGames.Domain.Commands.PersonCommands
 
         public async Task<ValidationResult> Handle(UpdatePersonCommand request, CancellationToken cancellationToken)
         {
-            if (!request.IsValid()) return request.ValidationResult;
-
-            var person = new Person(request.Id, request.Name, request.Phone);
-            var existing = await _repository.GetByName(person.Name);
-
-            if (existing != null && existing.Id != person.Id)
+            try
             {
-                if (!existing.Equals(person))
-                {
-                    AddError("Essa pessoa não existe");
-                    return ValidationResult;
-                }
-            }
+                if (!request.IsValid()) return request.ValidationResult;
 
-            _repository.Update(person);
-            return await Commit(_repository.UnitOfWork);
+                var person = new Person(request.Id, request.Name, request.Phone);
+                var existing = await _repository.GetByName(person.Name);
+
+                if (existing != null && existing.Id != person.Id)
+                {
+                    if (!existing.Equals(person))
+                    {
+                        AddError("Essa pessoa não existe");
+                        return ValidationResult;
+                    }
+                }
+
+                _repository.Update(person);
+                return await Commit(_repository.UnitOfWork);
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            
         }
         public async Task<ValidationResult> Handle(RemovePersonCommand request, CancellationToken cancellationToken)
         {

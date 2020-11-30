@@ -33,11 +33,27 @@ namespace LoanGames.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    UserName = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true),
+                    Active = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Loans",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
+                    DateReturn = table.Column<DateTime>(nullable: true),
                     Person_Id = table.Column<Guid>(nullable: false),
                     Game_Id = table.Column<Guid>(nullable: false)
                 },
@@ -58,6 +74,11 @@ namespace LoanGames.Infra.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "User",
+                columns: new[] { "Id", "Active", "Name", "Password", "UserName" },
+                values: new object[] { new Guid("ce6883ad-8ddb-4cbd-903a-f7a7ce13a928"), true, "Admin", "123456", "admin" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Loans_Game_Id",
                 table: "Loans",
@@ -73,6 +94,9 @@ namespace LoanGames.Infra.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Loans");
+
+            migrationBuilder.DropTable(
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "Games");

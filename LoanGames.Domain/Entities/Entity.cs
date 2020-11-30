@@ -1,8 +1,9 @@
-﻿using System;
+﻿using NetDevPack.Domain;
+using System;
 
 namespace LoanGames.Domain.Entities
 {
-    public abstract class Entity
+    public abstract class Entity :  IAggregateRoot
     {
         protected Entity()
         {

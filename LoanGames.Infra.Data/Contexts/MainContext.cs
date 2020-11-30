@@ -6,23 +6,21 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using System.Linq;
 using LoanGames.Infra.Data.Mappings;
+using NetDevPack.Data;
 
 namespace LoanGames.Infra.Data.Contexts
 {
     public class MainContext : DbContext, IUnitOfWork
     {
-       private readonly IMediatorHandler _mediatorHandler;
 
-        public MainContext(DbContextOptions<MainContext> options, IMediatorHandler mediatorHandler) : base(options)
+        public MainContext(DbContextOptions<MainContext> options) : base(options)
         {
-            _mediatorHandler = mediatorHandler;
-            ChangeTracker.AutoDetectChangesEnabled = true;
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            ChangeTracker.AutoDetectChangesEnabled = false;
         }
 
         public async Task<bool> Commit()
         {
-           // await _mediatorHandler.PublishDomainEvents(this).ConfigureAwait(false);
             return await SaveChangesAsync() > 0;
         }
 
@@ -34,8 +32,7 @@ namespace LoanGames.Infra.Data.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Ignore<ValidationResult>();
-            // modelBuilder.Ignore<Event>();
-                       
+
             foreach (var entity in modelBuilder.Model.GetEntityTypes())
             {
                 foreach (var property in entity.GetProperties().Where(p => p.ClrType == typeof(string)))
@@ -44,7 +41,7 @@ namespace LoanGames.Infra.Data.Contexts
                 }
             }
 
-
+            modelBuilder.ApplyConfiguration(new UserMapping());
             modelBuilder.ApplyConfiguration(new PersonMapping());
             modelBuilder.ApplyConfiguration(new GameMapping());
             modelBuilder.ApplyConfiguration(new LoanMapping());

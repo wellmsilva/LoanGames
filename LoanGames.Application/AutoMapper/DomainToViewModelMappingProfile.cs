@@ -9,6 +9,10 @@ namespace LoanGames.Application.AutoMapper
         public DomainToViewModelMappingProfile()
         {
             CreateMap<Person, PersonViewModel>();
+            CreateMap<Game, GameViewModel>();
+            CreateMap<Loan, LoanViewModel>();
+
+            CreateMap<User, UserViewModel>();
         }
     }
 }

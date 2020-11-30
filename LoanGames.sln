@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoanGames.Infra.Data", "Loa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoanGames.Web", "LoanGames.Web\LoanGames.Web.csproj", "{0F1FB6C8-9D3B-4A5C-9B57-4E2F555B3A0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoanGames.Infra.CrossCutting.Bus", "LoanGames.Infra.CrossCutting.Bus\LoanGames.Infra.CrossCutting.Bus.csproj", "{DC0B6558-D4C8-408C-B2F8-63E3D4C42074}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoanGames.Infra.CrossCutting.Bus", "LoanGames.Infra.CrossCutting.Bus\LoanGames.Infra.CrossCutting.Bus.csproj", "{DC0B6558-D4C8-408C-B2F8-63E3D4C42074}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoanGames.Test", "LoanGames.Test\LoanGames.Test.csproj", "{CA4574BB-CC61-4955-B09E-C5663269D1A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{DC0B6558-D4C8-408C-B2F8-63E3D4C42074}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC0B6558-D4C8-408C-B2F8-63E3D4C42074}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC0B6558-D4C8-408C-B2F8-63E3D4C42074}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA4574BB-CC61-4955-B09E-C5663269D1A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA4574BB-CC61-4955-B09E-C5663269D1A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA4574BB-CC61-4955-B09E-C5663269D1A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA4574BB-CC61-4955-B09E-C5663269D1A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
