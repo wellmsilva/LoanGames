@@ -1,4 +1,4 @@
-# Sistema de empréstimo de livros
+# Sistema de empréstimo de jogos
 
 Documentação da API:
     http://localhost:8081/swagger
