@@ -53,7 +53,7 @@ namespace LoanGames.Web.Controllers
             await _gameAppService.Update(model);
         }
 
-        [HttpDelete("{id}")]
+        [HttpPost("{id}/delete")]
         public async Task Delete(Guid id)
         {
             await _gameAppService.Remove(id);

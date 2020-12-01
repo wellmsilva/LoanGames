@@ -7,33 +7,40 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '',
     name: 'Home',
     component: Home,
-    meta: {
-      requiresAuth: true
-    }
+    children: [
+      {
+        path: '/',
+        name: 'LoanList',
+        component: () => import('../views/Loans/LoanList.vue'),
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
+        path: '/persons',
+        name: 'PersonList',
+        component: PersonList,
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
+        path: '/games',
+        name: 'GameList',
+        component: () => import('../views/Games/GameList.vue'),
+        meta: {
+          requiresAuth: true
+        }
+      },
+    ]
   },
   {
-    path: '/persons',
-    name: 'PersonList',
-    component: PersonList,
-    meta: {
-      requiresAuth: true
-    }
-  },
-  { 
     path: '/login',
     name: 'Login',
     component: () => import('../views/Login.vue')
-  },
-  {
-    path: '/games',
-    name: 'GameList',
-    component: () => import('../views/Games/GameList.vue'),
-    meta: {
-      requiresAuth: true
-    }
   }
 ]
 

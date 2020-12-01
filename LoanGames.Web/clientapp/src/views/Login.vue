@@ -28,6 +28,7 @@
                     <v-text-field
                       label="Senha"
                       single-line
+                      type="password"
                       v-model="user.password"
                       name="password"
                       :rules="passwordRules"
@@ -145,6 +146,7 @@ export default {
 .limiter {
   width: 100%;
   margin: 0 auto;
+  padding: 20px;
 }
 
 .wrap-login100 {

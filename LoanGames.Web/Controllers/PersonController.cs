@@ -10,7 +10,7 @@ namespace LoanGames.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-  //  [Authorize]
+    [Authorize]
     public class PersonController : ControllerBase
     {
 

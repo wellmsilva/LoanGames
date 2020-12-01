@@ -2,6 +2,7 @@
 using LoanGames.Application.InputModels;
 using LoanGames.Application.Interfaces;
 using LoanGames.Application.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,6 +14,7 @@ namespace LoanGames.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class LoanController : ControllerBase
     {
 

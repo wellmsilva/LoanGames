@@ -1,47 +1,87 @@
 <template>
   <div class="pessoa">
     <h1>Meus Jogos</h1>
+    <div style="padding: 10px">
+      <v-btn small @click="novoItem()">Novo</v-btn>
+    </div>
     <v-data-table
       :headers="headers"
       :items="items"
       :loading="true"
       class="elevation-1"
     >
-      <v-progress-linear
-        v-slot:progress
-        color="blue"
-        indeterminate
-      ></v-progress-linear>
+      <template v-slot:progress color="blue" indeterminate></template>
       <template v-slot:items="props">
         <td>{{ props.item.name }}</td>
-        <td class="text-xs-right">{{ props.item.calories }}</td>
-        <td class="text-xs-right">{{ props.item.fat }}</td>
-        <td class="text-xs-right">{{ props.item.carbs }}</td>
-        <td class="text-xs-right">{{ props.item.protein }}</td>
-        <td class="text-xs-right">{{ props.item.iron }}</td>
+      </template>
+
+      <template v-slot:item.action="{ item }">
+        <v-icon small class="mr-2" @click="editItem(item)"> edit </v-icon>
+        <v-icon small class="mr-2" @click="deleteItem(item)"> delete </v-icon>
+        <v-icon small class="mr-2" @click="emprestaItem(item)">
+          remove_red_eye
+        </v-icon>
       </template>
     </v-data-table>
+
+    <game-form ref="gameForm" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
+import GameForm from "./GameForm.vue";
+import { obtemTodos, exclueGame } from "@/services/gameService";
 
 export default {
   name: "Home",
-  components: {},
+  components: { GameForm },
   data() {
     return {
       progress: false,
       headers: [
         { text: "Nome", value: "name" },
-        { text: "Telefone", value: "phone" },
+        {
+          text: "Ações",
+          value: "action",
+          sortable: false,
+          align: "center",
+          width: 120,
+        },
       ],
-      items: [{ id: "1", name: "WEllington ", phone: "" }],
+      items: [{ id: "1", name: "Lol ", phone: "" }],
     };
   },
-  created() {
-    //console.log("aqui");
+  mounted() {
+    this.carregaDados();
+  },
+  methods: {
+    editItem(item) {
+      this.$refs.gameForm.open(item, false);
+    },
+    novoItem() {
+      this.$refs.gameForm.open({}, true);
+    },
+    deleteItem(item) {
+      exclueGame(item.id)
+        .then(() => {
+          this.carregaDados()
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    emprestaItem(item) {
+      this.$refs.emprestaForm.open(item);
+    },
+    carregaDados() {
+      obtemTodos()
+        .then((result) => {
+          this.items = result.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
 };
 </script>

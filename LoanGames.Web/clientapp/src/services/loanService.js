@@ -2,11 +2,11 @@ import Http from './http';
 import { getToken } from './utils';
 
 
-export function obtemPessoas() {
+export function obtemTodos() {
     const token = getToken();
-    return Http.get('/person', {
-        params: {
-            'Authentication':  `Bearer ${token}`,
+    return Http.get('/api/loan', {
+        headers: {
+            'Authorization': `Bearer ${token}`
         }
     });
 }

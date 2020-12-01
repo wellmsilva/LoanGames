@@ -7,7 +7,7 @@
   >
     <v-card class="usuario-log">
       <v-card-title>
-        <span color="#fff" class="headline">Cadastro de jogo</span>
+        <span color="#fff" class="headline">Registra empréstimo</span>
         <v-spacer></v-spacer>
         <v-btn icon cicle @click="dialog = false">
           <v-icon>close</v-icon>
@@ -23,6 +23,13 @@
                 v-model="person.name"
               ></v-text-field>
             </v-col>
+            <v-col cols="12" sm="12" md="12">
+              <v-text-field
+                label="Telefone"
+                hint="99999-9999"
+                v-model="person.phone"
+              ></v-text-field>
+            </v-col>
           </v-row>
         </v-container>
       </v-card-text>
@@ -36,13 +43,10 @@
 </template>
 
 <script>
-import { cadastraGame, editaGame } from "@/services/gameService";
-
 export default {
   data: () => ({
     dialog: false,
     message: null,
-    isNovo:false,
     person: {
       id: "",
       name: "",
@@ -55,29 +59,13 @@ export default {
     },
   },
   methods: {
-    open(item, novo) {
+    open(item) {
       this.dialog = true;
-      this.isNovo = novo;
-      this.person =  item ;
+      this.person = item;
     },
     save() {
-      if (this.isNovo) {
-        cadastraGame(this.person)
-          .then(() => {
-            this.dialog = false;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      } else {
-        editaGame(this.person)
-          .then(() => {
-            this.dialog = false;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
+      this.dialog = false;
+      console.log(this.person);
     },
   },
 };

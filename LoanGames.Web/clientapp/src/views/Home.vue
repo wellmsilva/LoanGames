@@ -1,48 +1,41 @@
 <template>
-  <div class="pessoa">
-      <h1>Emprestados</h1>
- <v-data-table
-    :headers="headers"
-    :items="items"
-    :loading="true"
-    class="elevation-1"
-  >
-    <v-progress-linear v-slot:progress color="blue" indeterminate></v-progress-linear>
-    <template v-slot:items="props">
-      <td>{{ props.item.name }}</td>
-      <td class="text-xs-right">{{ props.item.calories }}</td>
-      <td class="text-xs-right">{{ props.item.fat }}</td>
-      <td class="text-xs-right">{{ props.item.carbs }}</td>
-      <td class="text-xs-right">{{ props.item.protein }}</td>
-      <td class="text-xs-right">{{ props.item.iron }}</td>
-    </template>
-  </v-data-table>
+  <div id="app" data-app>
+    <!-- <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/Persons">Pessoa</router-link> |
+      <router-link to="/Games">Games</router-link> |
+      <button v-on:click="logout()" v-show="logado">Sair</button>
+    </div> -->
+    <v-toolbar>
+      <!-- Adjust the height to your needs, mine is 40 -->
+      <v-toolbar-title>Title</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items id="nav">
+        <v-btn text><router-link to="/">Home</router-link></v-btn>
+        <v-btn text><router-link to="/Persons">Pessoa</router-link></v-btn>
+        <v-btn text><router-link to="/Games">Games</router-link></v-btn>
+        <v-spacer></v-spacer>
+        <v-btn text ><button v-on:click="logout()" v-show="logado">Sair</button></v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
+    <v-container> <router-view /> </v-container>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-
+import { logOut } from "@/services/utils";
 
 export default {
-  name: 'Home',
-  components: {
-
+  name: "Home",
+  components: {},
+  computed: {
+    logado: () => sessionStorage.getItem("token") != null,
   },
-  data(){
-    return{
-      progress:false,
-      headers:[
-        { text: 'Nome', value: 'name' },
-        { text: 'Telefone', value: 'phone' },
-      ],
-      items:[
-        { id:'1', name:'WEllington ', phone:''  }
-      ]
-    }
+  methods: {
+    logout() {
+      logOut();
+      this.$router.push("/");
+    },
   },
-  created(){
-    //console.log("aqui");
-  }
-}
+};
 </script>

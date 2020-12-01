@@ -1,29 +1,15 @@
 <template>
   <div id="app" data-app>
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/Persons">Pessoa</router-link> |
-      <router-link to="/Games">Games</router-link> |
-      <button v-on:click="logout()" v-show="logado">Sair</button>
-    </div>
     <router-view />
   </div>
 </template>
 
 <script>
-import { logOut } from '@/services/utils';
+
 
 
 export default {
-  computed: {
-    logado: () => sessionStorage.getItem("token") != null,
-  },
-  methods:{
-    logout(){
-      logOut();
-      this.$router.push('/')  
-    }
-  }
+
 };
 </script>
 
