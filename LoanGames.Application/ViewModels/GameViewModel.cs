@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Text;
 
 namespace LoanGames.Application.ViewModels
@@ -16,5 +17,9 @@ namespace LoanGames.Application.ViewModels
         [MaxLength(100)]
         [DisplayName("Nome")]
         public string Name { get; set; }
+        public virtual IEnumerable<LoanViewModel> Loans { get; set; }
+
+        public bool Loaned => Loans.Any(x => !x.DateReturn.HasValue);
+     
     }
 }

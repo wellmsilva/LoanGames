@@ -34,7 +34,11 @@ namespace LoanGames.Infra.Data.Repositories
 
         public async Task<IEnumerable<Loan>> GetAll()
         {
-            return await DbSet.ToListAsync();
+            return await DbSet
+                    .Include(x => x.Game)
+                    .Include(x => x.Person)
+                    .Where(x => !x.DateReturn.HasValue)
+                    .ToListAsync();
         }
     }
 }

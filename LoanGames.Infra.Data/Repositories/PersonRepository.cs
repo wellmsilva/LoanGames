@@ -4,6 +4,7 @@ using LoanGames.Infra.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LoanGames.Infra.Data.Repositories
@@ -18,7 +19,10 @@ namespace LoanGames.Infra.Data.Repositories
 
         public async Task<IEnumerable<Person>> GetAll()
         {
-            return await DbSet.ToListAsync();
+            return await DbSet
+                .Include(x => x.Loans)
+               .ThenInclude(x => x.Game)
+               .ToListAsync();
         }
 
         public async Task<Person> GetById(Guid id)

@@ -10,3 +10,20 @@ export function obtemTodos() {
         }
     });
 }
+
+export function devolve(model) {
+    const token = getToken()
+    return Http.post('/api/loan/devolve', model, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+}
+export function empresta(model) {
+    const token = getToken()
+    return Http.post('/api/loan/empresta', model, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+}

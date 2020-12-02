@@ -1,103 +1,105 @@
 <template>
   <div class="limiter">
-    <h1>LOGIN</h1>
-    <div class="container-login100">
-      <div class="wrap-login100">
-        <v-container fluid>
-          <v-row align="center" justify="center">
-            <v-card
-              class="login100-form container-form"
-              flat
-              style="border-radius: 15px"
-            >
-              <v-card-text>
-                <v-layout row wrap justify-center>
-                  <v-flex xs10 sm10 lg9>
-                    <v-text-field
-                      light
-                      label="Usuário"
-                      single-line
-                      v-model="user.username"
-                      name="username"
-                      type="text"
-                      required
-                      prepend-icon="email"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs10 sm10 lg9>
-                    <v-text-field
-                      label="Senha"
-                      single-line
-                      type="password"
-                      v-model="user.password"
-                      name="password"
-                      :rules="passwordRules"
-                      required
-                      prepend-icon="lock"
-                      @keydown.enter="signin"
-                    />
-                  </v-flex>
-                </v-layout>
-              </v-card-text>
-              <v-card-actions>
-                <v-layout row wrap justify-center>
-                  <v-flex xs10 sm10 lg9>
-                    <v-btn
-                      dark
-                      depressed
-                      block
-                      color="#00253E"
-                      style="border-radius: 7px; margin-bottom: 15px"
-                      large
-                      @click="signin()"
-                      >Acessar</v-btn
+    <div class="container">
+      <h1>LOGIN</h1>
+      <div class="container-login100">
+        <div class="wrap-login100">
+          <v-container fluid>
+            <v-row align="center" justify="center">
+              <v-card
+                class="login100-form container-form"
+                flat
+                style="border-radius: 15px"
+              >
+                <v-card-text>
+                  <v-layout row wrap justify-center>
+                    <v-flex xs10 sm10 lg9>
+                      <v-text-field
+                        light
+                        label="Usuário"
+                        single-line
+                        v-model="user.username"
+                        name="username"
+                        type="text"
+                        required
+                        prepend-icon="email"
+                      ></v-text-field>
+                    </v-flex>
+                    <v-flex xs10 sm10 lg9>
+                      <v-text-field
+                        label="Senha"
+                        single-line
+                        type="password"
+                        v-model="user.password"
+                        name="password"
+                        :rules="passwordRules"
+                        required
+                        prepend-icon="lock"
+                        @keydown.enter="signin"
+                      />
+                    </v-flex>
+                  </v-layout>
+                </v-card-text>
+                <v-card-actions>
+                  <v-layout row wrap justify-center>
+                    <v-flex xs10 sm10 lg9>
+                      <v-btn
+                        dark
+                        depressed
+                        block
+                        color="#00253E"
+                        style="border-radius: 7px; margin-bottom: 15px"
+                        large
+                        @click="signin()"
+                        >Acessar</v-btn
+                      >
+                    </v-flex>
+                    <v-flex
+                      xs10
+                      sm5
+                      lg4
+                      style="text-align: left"
+                      v-if="!usuarioLogado"
                     >
-                  </v-flex>
-                  <v-flex
-                    xs10
-                    sm5
-                    lg4
-                    style="text-align: left"
-                    v-if="!usuarioLogado"
-                  >
-                    <router-link
-                      to="resetar-senha"
-                      style="
-                        text-decoration: none;
-                        color: #082440;
-                        font-size: 14px;
-                        margin-bottom: 15px;
-                      "
-                      >Esqueceu a senha?</router-link
+                      <router-link
+                        to="resetar-senha"
+                        style="
+                          text-decoration: none;
+                          color: #082440;
+                          font-size: 14px;
+                          margin-bottom: 15px;
+                        "
+                        >Esqueceu a senha?</router-link
+                      >
+                    </v-flex>
+                    <v-flex
+                      xs10
+                      sm5
+                      lg5
+                      style="text-align: right"
+                      v-if="!usuarioLogado"
                     >
-                  </v-flex>
-                  <v-flex
-                    xs10
-                    sm5
-                    lg5
-                    style="text-align: right"
-                    v-if="!usuarioLogado"
-                  >
-                    <router-link
-                      to="solicita-acesso"
-                      style="
-                        text-decoration: none;
-                        color: #082440;
-                        font-size: 14px;
-                        margin-bottom: 15px;
-                      "
-                      >Deseja solicitar acesso?</router-link
-                    >
+                      <router-link
+                        to="solicita-acesso"
+                        style="
+                          text-decoration: none;
+                          color: #082440;
+                          font-size: 14px;
+                          margin-bottom: 15px;
+                        "
+                        >Deseja solicitar acesso?</router-link
+                      >
 
-                    <!-- <a href @click.prevent="showSignup = !showSignup" style="text-decoration: none;">
+                      <!-- <a href @click.prevent="showSignup = !showSignup" style="text-decoration: none;">
                                         <span style="color:#082440;font-size:14px;margin-bottom: 15px;">Deseja solicitar acesso?</span>
                                     </a> -->
-                  </v-flex>
-                </v-layout>
-              </v-card-actions>
-            </v-card>
-          </v-row>
-        </v-container>
+                    </v-flex>
+                  </v-layout>
+                </v-card-actions>
+              </v-card>
+            </v-row>
+          </v-container>
+        </div>
       </div>
     </div>
   </div>
@@ -105,8 +107,7 @@
 
 <script >
 import { login } from "@/services/userService";
-import { setUser } from '@/services/utils';
-
+import { setUser } from "@/services/utils";
 
 export default {
   data() {
@@ -132,7 +133,7 @@ export default {
       login(this.user)
         .then((result) => {
           setUser(result.data);
-          this.$router.push('/')  
+          this.$router.push("/");
         })
         .catch((err) => {
           console.log(err);
@@ -148,7 +149,11 @@ export default {
   margin: 0 auto;
   padding: 20px;
 }
-
+.container {
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
 .wrap-login100 {
   width: 400px;
   overflow: hidden;

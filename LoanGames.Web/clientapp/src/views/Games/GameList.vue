@@ -18,6 +18,14 @@
       <template v-slot:item.action="{ item }">
         <v-icon small class="mr-2" @click="editItem(item)"> edit </v-icon>
         <v-icon small class="mr-2" @click="deleteItem(item)"> delete </v-icon>
+        <v-icon
+          small
+          class="mr-2"
+          :disabled="item.loaned"
+          @click="lendItem(item)"
+        >
+          edit
+        </v-icon>
         <v-icon small class="mr-2" @click="emprestaItem(item)">
           remove_red_eye
         </v-icon>
@@ -25,16 +33,21 @@
     </v-data-table>
 
     <game-form ref="gameForm" />
+    <game-loan ref="gameLoan" />
+    <lend-game ref="lendGame" @empresta="empresta" />>
   </div>
 </template>
 
 <script>
 import GameForm from "./GameForm.vue";
 import { obtemTodos, exclueGame } from "@/services/gameService";
+import { empresta } from "@/services/loanService";
+import GameLoan from "./GameLoan.vue";
+import LendGame from "./LendGame.vue";
 
 export default {
   name: "Home",
-  components: { GameForm },
+  components: { GameForm, GameLoan, LendGame },
   data() {
     return {
       progress: false,
@@ -45,7 +58,7 @@ export default {
           value: "action",
           sortable: false,
           align: "center",
-          width: 120,
+          width: 180,
         },
       ],
       items: [{ id: "1", name: "Lol ", phone: "" }],
@@ -64,19 +77,32 @@ export default {
     deleteItem(item) {
       exclueGame(item.id)
         .then(() => {
-          this.carregaDados()
+          this.carregaDados();
         })
         .catch((err) => {
           console.log(err);
         });
     },
     emprestaItem(item) {
-      this.$refs.emprestaForm.open(item);
+      this.$refs.gameLoan.open(item);
+    },
+    lendItem(item) {
+      this.$refs.lendGame.open(item);
     },
     carregaDados() {
       obtemTodos()
         .then((result) => {
           this.items = result.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    empresta(value) {
+      empresta(value)
+        .then(() => {
+          this.carregaDados();
+          this.$refs.lendGame.close();
         })
         .catch((err) => {
           console.log(err);

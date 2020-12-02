@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using LoanGames.Application.InputModels;
 using LoanGames.Application.ViewModels;
 using LoanGames.Domain.Commands.GameCommands;
+using LoanGames.Domain.Commands.LoanCommands;
 using LoanGames.Domain.Commands.PersonCommands;
 
 namespace LoanGames.Application.AutoMapper
@@ -21,7 +23,13 @@ namespace LoanGames.Application.AutoMapper
             CreateMap<GameViewModel, UpdateGameCommand>()
                 .ConstructUsing(c => new UpdateGameCommand(c.Id, c.Name));
 
+            //
 
+            CreateMap<LoanInputModel, GiveBackLoanCommand>()
+                .ConstructUsing(c => new GiveBackLoanCommand(c.Game_Id, c.Person_Id));
+
+            CreateMap<LoanInputModel, RegisterLoanCommand>()
+                .ConstructUsing(c => new RegisterLoanCommand(c.Game_Id, c.Person_Id));
         }
     }
 }

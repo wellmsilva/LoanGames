@@ -10,7 +10,9 @@ namespace LoanGames.Application.AutoMapper
         {
             CreateMap<Person, PersonViewModel>();
             CreateMap<Game, GameViewModel>();
-            CreateMap<Loan, LoanViewModel>();
+            CreateMap<Loan, LoanViewModel>()
+                .ForMember( dest => dest.Person, map => map.MapFrom(o => o.Person.Name))
+                .ForMember( dest => dest.Game, map => map.MapFrom(o => o.Game.Name));
 
             CreateMap<User, UserViewModel>();
         }

@@ -39,3 +39,9 @@ export default {
   },
 };
 </script>
+
+<style>
+tbody button{
+  margin-right: 8px;
+}
+</style>

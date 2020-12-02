@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -19,6 +20,8 @@ namespace LoanGames.Application.ViewModels
         [MaxLength(11)]
         [DisplayName("Telefone")]
         public string Phone { get;  set; }
-        
+
+        public virtual IEnumerable<LoanViewModel> Loans { get; set; }
+
     }
 }

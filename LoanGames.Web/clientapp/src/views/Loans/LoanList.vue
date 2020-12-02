@@ -8,14 +8,12 @@
       class="elevation-1"
     >
       <template v-slot:items="props">
-        <td>{{ props.item.data }}</td>
+        <td>{{ props.item.name }}</td>
         <td>{{ props.item.person }}</td>
         <td>{{ props.item.game }}</td>
       </template>
 
-      <template v-slot:item.action="{ item }">
-        <v-icon small class="mr-2" @click="devolver(item)"> edit </v-icon>
-       </template>
+      
     </v-data-table>
 
     <loan-form ref="loanForm" />
@@ -35,7 +33,7 @@ export default {
     return {
       progress: false,
       headers: [
-        { text: "Date", value: "name" },
+        { text: "Date", value: "date" },
         { text: "Pessoa", value: "person" },
         { text: "Jogo", value: "game" },
         {
@@ -53,9 +51,7 @@ export default {
     this.carregaDados();
   },
   methods: {
-    devolver(item) {
-      this.$refs.loanForm.open(item);
-    },
+
     carregaDados() {
       obtemTodos()
         .then((result) => {

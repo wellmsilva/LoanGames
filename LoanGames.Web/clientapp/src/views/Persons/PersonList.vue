@@ -15,24 +15,28 @@
       <template v-slot:item.action="{ item }">
         <v-icon small class="mr-2" @click="editItem(item)"> edit </v-icon>
         <v-icon small class="mr-2" @click="deleteItem(item)"> delete </v-icon>
-        <v-icon small class="mr-2" @click="logItem(item)">
+        <v-icon small class="mr-2" @click="personGames(item)">
           remove_red_eye
         </v-icon>
       </template>
     </v-data-table>
 
     <PersonEdit ref="personEdit" />
+    <PersonGames ref="personGames" @devolve="devolver" />
   </div>
 </template>
 
 <script>
 import { obtemPessoas, excluePessoa } from "@/services/personService";
+import { devolve } from "@/services/loanService";
 import PersonEdit from "./PersonEdit";
+import PersonGames from "./PersonGames";
 
 export default {
   name: "Home",
   components: {
     PersonEdit,
+    PersonGames,
   },
   data() {
     return {
@@ -72,10 +76,23 @@ export default {
       this.$refs.personEdit.open(item);
       this.dialogEdit = true;
     },
+    personGames(item) {
+      this.$refs.personGames.open(item);
+    },
     deleteItem(item) {
       excluePessoa(item.id)
         .then((res) => {
           console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    devolver(item) {
+      devolve(item)
+        .then(() => {
+          this.carregaPessoas();
+          this.$refs.personGames.close();
         })
         .catch((err) => {
           console.log(err);

@@ -36,7 +36,8 @@ namespace LoanGames.Application.Services
 
         public async Task<IEnumerable<PersonViewModel>> GetAll()
         {
-            return _mapper.Map<IEnumerable<PersonViewModel>>(await _personRepository.GetAll());
+            var persons = await _personRepository.GetAll();
+            return _mapper.Map<IEnumerable<PersonViewModel>>(persons);
         }
 
         public async Task<PersonViewModel> GetById(Guid id)

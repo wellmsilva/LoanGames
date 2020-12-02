@@ -340,3 +340,6 @@ ASALocalRun/
 healthchecksdb
 LoanGames.Web/clientapp/package-lock.json
 .gitignore
+LoanGames.Web/LoanGames.db
+LoanGames.Web/LoanGames.db-shm
+LoanGames.Web/LoanGames.db-wal
